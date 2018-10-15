@@ -1,0 +1,24 @@
+<?php declare(strict_types=1);
+
+use League\Route\Router;
+use League\Route\Strategy\JsonStrategy;
+use Zend\Diactoros\ResponseFactory;
+
+$arr = compact("container");
+if (!isset($arr["container"])) {
+    throw new Exception("No container instance available");
+}
+$container = $arr['container'];
+
+$responseFactory = new ResponseFactory();
+$routerStrategy = (new JsonStrategy($responseFactory))->setContainer($container);
+$router = (new Router())->setStrategy($routerStrategy);
+
+$router->get('/', function () {
+    return [
+        'title'   => 'My New Simple API',
+        'version' => 1,
+    ];
+});
+
+return $router;
