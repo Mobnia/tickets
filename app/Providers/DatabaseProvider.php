@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 
-use App\Models\Board;
+use App\Models\Event;
+use App\Models\Location;
+use App\Models\Team;
 use Illuminate\Database\Capsule\Manager;
 use Illuminate\Database\Eloquent\Relations\Relation;
 /**
@@ -36,7 +38,9 @@ class DatabaseProvider extends AbstractServiceProvider
 
         // Register polymorph mappings from name to model
         Relation::morphMap([
-            Board::MORPH_NAME => Board::class,
+            Event::MORPH_NAME => Event::class,
+            Team::MORPH_NAME => Team::class,
+            Location::MORPH_NAME => Location::class,
         ]);
 
         $manager->setAsGlobal();

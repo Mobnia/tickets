@@ -21,4 +21,8 @@ $router->get('/', function () {
     ];
 });
 
+$router->group('/', function ($router) {
+    $router->get('/events', '\App\Controllers\Events\EventController::getUpcomingEvents');
+});
+
 return $router;

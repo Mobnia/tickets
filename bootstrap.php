@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 use App\ContainerAdaptor;
+use Dotenv\Dotenv;
 use Illuminate\Container\Container;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequestFactory;
@@ -19,6 +20,9 @@ if ($environment !== 'production') {
     });
 }
 $whoops->register();
+
+$dotenv = new Dotenv(dirname(__FILE__));
+$dotenv->load();
 
 $container = new ContainerAdaptor();
 Container::setInstance($container);
