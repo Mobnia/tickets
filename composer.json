@@ -4,7 +4,7 @@
     "type": "project",
     "require-dev": {
         "filp/whoops": "^2.2",
-        "phpunit/phpunit": "^7.3"
+        "phpunit/phpunit": "^7.4"
     },
     "license": "MIT",
     "authors": [
