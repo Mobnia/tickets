@@ -15,6 +15,21 @@ use PHPUnit\Framework\TestCase;
 
 class EventControllerTest extends TestCase
 {
+    private $request;
+    private $response;
+
+    public function __construct(?string $name = null, array $data = [], string $dataName = '')
+    {
+        // TODO: Stop mocking what you don't own
+        $this->event = new Event();
+        $this->request = $this->createMock('Zend\Diactoros\ServerRequest');
+        $this->response = $this->createMock('Zend\Diactoros\Response');
+
+        $this->eventController = new EventController($this->request, $this->response, $this->event);
+
+        parent::__construct($name, $data, $dataName);
+    }
+
     protected function setUp()
     {
         $this->configureDatabase();
@@ -44,11 +59,11 @@ class EventControllerTest extends TestCase
 
     public function testGetUpcomingEvents()
     {
-        $request = $this->createMock('Zend\Diactoros\ServerRequest');
-        $response = $this->createMock('Zend\Diactoros\Response');
-        $event = new Event();
-        $eventController = new EventController($request, $response, $event);
+        $this->assertArrayHasKey('data', $this->eventController->getUpcomingEvents());
+    }
 
-        $this->assertArrayHasKey('data', $eventController->getUpcomingEvents());
+    public function testGetAnEvent()
+    {
+        $this->assertArrayHasKey('data', $this->eventController->getEvent(1));
     }
 }

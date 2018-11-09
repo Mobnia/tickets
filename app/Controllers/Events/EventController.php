@@ -27,21 +27,28 @@ class EventController extends BaseController
     {
         $events = $this->getAllEvents();
 
-        $this->addEventDetails($events);
+        foreach ($events as $event) {
+            $this->addEventDetails($event);
+        }
 
         return $this->convertObjectToArray($events);
     }
 
-    /**
-     * @param $events
-     */
-    protected function addEventDetails($events): void
+    public function getEvent($id)
     {
-        foreach ($events as $event) {
-            $event->homeTeam;
-            $event->awayTeam;
-            $event->location;
-        }
+        $event = $this->event::find($id);
+        $this->addEventDetails($event);
+        return $this->convertObjectToArray($event);
+    }
+
+    /**
+     * @param $event
+     */
+    protected function addEventDetails($event): void
+    {
+        $event->homeTeam;
+        $event->awayTeam;
+        $event->location;
     }
 
     /**
