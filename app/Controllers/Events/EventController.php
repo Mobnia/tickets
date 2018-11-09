@@ -25,7 +25,7 @@ class EventController extends BaseController
 
     public function getUpcomingEvents()
     {
-        $events = $this->getAllEvents();
+        $events = $this->getEverything($this->event);
 
         foreach ($events as $event) {
             $this->addEventDetails($event);
@@ -49,15 +49,6 @@ class EventController extends BaseController
         $event->homeTeam;
         $event->awayTeam;
         $event->location;
-    }
-
-    /**
-     * @return Event[]|\Illuminate\Database\Eloquent\Collection
-     */
-    protected function getAllEvents()
-    {
-        $events = $this->event::all();
-        return $events;
     }
 
 }

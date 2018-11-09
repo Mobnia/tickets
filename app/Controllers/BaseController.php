@@ -29,4 +29,13 @@ class BaseController
             'data' => $data
         ];
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    protected function getEverything($model)
+    {
+        $records = $model::all();
+        return $records;
+    }
 }
