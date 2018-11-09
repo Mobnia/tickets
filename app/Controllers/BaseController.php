@@ -24,6 +24,9 @@ class BaseController
 
     public function convertObjectToArray($object): array
     {
-        return json_decode(json_encode($object), true);
+        $data = json_decode(json_encode($object), true);
+        return [
+            'data' => $data
+        ];
     }
 }

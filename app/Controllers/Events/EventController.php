@@ -5,6 +5,9 @@ namespace App\Controllers\Events;
 
 use App\Controllers\BaseController;
 use App\Models\Event;
+use Zend\Diactoros\Response;
+use Zend\Diactoros\ServerRequest as Request;
+
 /**
  * Class EventController
  *
@@ -12,9 +15,17 @@ use App\Models\Event;
  */
 class EventController extends BaseController
 {
+    private $event;
+
+    public function __construct(Request $request, Response $response, Event $event)
+    {
+        $this->event = $event;
+        parent::__construct($request, $response);
+    }
+
     public function getUpcomingEvents()
     {
-        $events = Event::all();
+        $events = $this->event::all();
 
         foreach ($events as $event) {
             $event->homeTeam;
@@ -22,9 +33,7 @@ class EventController extends BaseController
             $event->location;
         }
 
-        return [
-            'data' => $this->convertObjectToArray($events),
-        ];
+        return $this->convertObjectToArray($events);
     }
 
 }
