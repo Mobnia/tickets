@@ -7,6 +7,7 @@ use App\Controllers\BaseController;
 use App\Models\Event;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest as Request;
+use Zend\Diactoros\ServerRequest;
 
 /**
  * Class EventController
@@ -34,8 +35,9 @@ class EventController extends BaseController
         return $this->convertObjectToArray($events);
     }
 
-    public function getEvent($id)
+    public function getEvent(ServerRequest $request, $args)
     {
+        $id = $args['id'];
         $event = $this->event::find($id);
         $this->addEventDetails($event);
         return $this->convertObjectToArray($event);

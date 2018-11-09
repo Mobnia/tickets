@@ -23,6 +23,8 @@ $router->get('/', function () {
 
 $router->group('/', function ($router) {
     $router->get('/events', '\App\Controllers\Events\EventController::getUpcomingEvents');
+    $router->get('/events/{id :number}', '\App\Controllers\Events\EventController::getEvent');
+    $router->get('/teams', '\App\Controllers\Teams\TeamController::getTeams');
 });
 
 return $router;
