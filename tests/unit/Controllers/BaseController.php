@@ -5,6 +5,8 @@ namespace App\Test\unit\Controllers;
 
 use Illuminate\Database\Capsule\Manager;
 use PHPUnit\Framework\TestCase;
+use Zend\Diactoros\Response;
+use Zend\Diactoros\ServerRequest;
 
 /**
  * Class BaseController
@@ -19,8 +21,8 @@ class BaseController extends TestCase
     public function __construct(?string $name = null, array $data = [], string $dataName = '')
     {
         // TODO: Stop mocking what you don't own
-        $this->request = $this->createMock('Zend\Diactoros\ServerRequest');
-        $this->response = $this->createMock('Zend\Diactoros\Response');
+        $this->request = new ServerRequest();
+        $this->response = new Response();
 
         parent::__construct($name, $data, $dataName);
     }
