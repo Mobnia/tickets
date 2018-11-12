@@ -48,9 +48,11 @@ class EventController extends BaseController
      */
     protected function addEventDetails($event): void
     {
-        $event->homeTeam;
-        $event->awayTeam;
-        $event->location;
+        if(isset($event)) {
+            $event->homeTeam;
+            $event->awayTeam;
+            $event->location;
+        }
     }
 
 }

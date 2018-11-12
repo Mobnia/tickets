@@ -48,6 +48,6 @@ class TeamController extends BaseController
 
     protected function addTeamDetails($team)
     {
-        $team->location;
+        if(isset($team)) $team->location;
     }
 }
