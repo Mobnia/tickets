@@ -6,6 +6,7 @@ namespace App\Providers;
 use App\Models\Event;
 use App\Models\Location;
 use App\Models\Team;
+use App\Models\Ticket;
 use Illuminate\Database\Capsule\Manager;
 use Illuminate\Database\Eloquent\Relations\Relation;
 /**
@@ -18,10 +19,7 @@ class DatabaseProvider extends AbstractServiceProvider
 
     public function register()
     {
-        $dbUser = getenv("DB_USER");
-        $dbHost = getenv("DB_HOST");
-        $dbName = getenv("DB_NAME");
-        $dbPassword = getenv("DB_PASSWORD");
+        list($dbUser, $dbHost, $dbName, $dbPassword) = $this->getDatabaseDetails();
 
         $manager = new Manager($this->container);
         $manager->addConnection([
@@ -37,11 +35,7 @@ class DatabaseProvider extends AbstractServiceProvider
         $manager->getDatabaseManager()->setDefaultConnection('default');
 
         // Register polymorph mappings from name to model
-        Relation::morphMap([
-            Event::MORPH_NAME => Event::class,
-            Team::MORPH_NAME => Team::class,
-            Location::MORPH_NAME => Location::class,
-        ]);
+        $this->registerPolymorphicMappings();
 
         $manager->setAsGlobal();
         // TODO: Add event listener
@@ -51,5 +45,24 @@ class DatabaseProvider extends AbstractServiceProvider
         $this->container->singleton(\PDO::class, function () use ($manager) {
             return $manager->getConnection()->getPdo();
         });
+    }
+
+    private function getDatabaseDetails(): array
+    {
+        $dbUser = getenv("DB_USER");
+        $dbHost = getenv("DB_HOST");
+        $dbName = getenv("DB_NAME");
+        $dbPassword = getenv("DB_PASSWORD");
+        return [$dbUser, $dbHost, $dbName, $dbPassword];
+    }
+
+    private function registerPolymorphicMappings(): void
+    {
+        Relation::morphMap([
+            Event::MORPH_NAME => Event::class,
+            Team::MORPH_NAME => Team::class,
+            Location::MORPH_NAME => Location::class,
+            Ticket::MORPH_NAME => Ticket::class
+        ]);
     }
 }
