@@ -27,6 +27,16 @@ class TeamController extends BaseController
     public function getTeams()
     {
         $teams = $this->getEverything($this->team);
+
+        foreach ($teams as $team) {
+            $this->addTeamDetails($team);
+        }
+
         return $this->convertObjectToArray($teams);
+    }
+
+    protected function addTeamDetails($team)
+    {
+        $team->location;
     }
 }
