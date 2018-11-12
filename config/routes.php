@@ -23,8 +23,9 @@ $router->get('/', function () {
 
 $router->group('/', function ($router) {
     $router->get('/events', '\App\Controllers\Events\EventController::getUpcomingEvents');
-    $router->get('/events/{id :number}', '\App\Controllers\Events\EventController::getEvent');
+    $router->get('/events/{id:number}', '\App\Controllers\Events\EventController::getEvent');
     $router->get('/teams', '\App\Controllers\Teams\TeamController::getTeams');
+    $router->get('/teams/{id:number}', '\App\Controllers\Teams\TeamController::getTeam');
 });
 
 return $router;

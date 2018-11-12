@@ -5,6 +5,7 @@ namespace App\Controllers\Teams;
 
 use App\Controllers\BaseController;
 use App\Models\Team;
+use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest as Request;
 
@@ -33,6 +34,16 @@ class TeamController extends BaseController
         }
 
         return $this->convertObjectToArray($teams);
+    }
+
+    public function getTeam(ServerRequestInterface $request, $args)
+    {
+        $id = $args['id'];
+        $team = $this->team::find($id);
+
+        $this->addTeamDetails($team);
+
+        return $this->convertObjectToArray($team);
     }
 
     protected function addTeamDetails($team)
