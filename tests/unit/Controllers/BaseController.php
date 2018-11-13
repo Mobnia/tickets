@@ -36,21 +36,20 @@ class BaseController extends TestCase
     {
         $dbUser = getenv("DB_USER");
         $dbHost = getenv("DB_HOST");
-        $dbName = getenv("DB_NAME");
         $dbPassword = getenv("DB_PASSWORD");
 
-        $db = new Manager();
-        $db->addConnection([
+        $manager = new Manager();
+        $manager->addConnection([
             'driver' => "mysql",
             'host' => $dbHost,
-            'database' => $dbName,
+            'database' => 'test_dms_sample',
             'username' => $dbUser,
             'password' => $dbPassword,
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
         ]);
-        $db->bootEloquent();
-        $db->setAsGlobal();
+        $manager->bootEloquent();
+        $manager->setAsGlobal();
     }
 }

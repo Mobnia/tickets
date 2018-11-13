@@ -33,9 +33,24 @@ class BaseController
     /**
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    protected function getEverything($model)
+    protected function getAllRecords(Base $model)
     {
         $records = $model::all();
         return $records;
     }
+
+/*    protected function getPaginatedRecords(Base $model)
+    {
+//        $numberOfRecords = $this->pdoConnection->query($model->generateCountSql());
+//        $queryParams = $this->request->getQueryParams();
+//
+//        $page = isset($queryParams['page']) ? (int) $queryParams['page'] : 1;
+//        $perPage = isset($queryParams['number']) ? (int) $queryParams['number'] : 20;
+//        $pageCount = ceil($numberOfRecords/$perPage);
+
+//        $records = $model::whereBetween('id', [1, 20])->get();
+        $records = $model::paginate(10);
+
+        return $records;
+    }*/
 }
