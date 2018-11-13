@@ -27,7 +27,7 @@ class TicketController extends BaseController
     public function getTicketsForEvent(ServerRequest $request, $args)
     {
         $eventId = $args['id'];
-        $tickets = $this->tickets::where('sporting_event_id', $eventId)->get();
+        $tickets = $this->tickets::where('sporting_event_id', $eventId)->where('ticketholder_id', null)->get();
         return $this->convertObjectToArray($tickets);
     }
 }
