@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 
 use App\Models\Base;
+use League\Route\Http\Exception\NotFoundException;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest as Request;
 /**
@@ -24,6 +25,8 @@ class BaseController
 
     public function convertObjectToArray($object): array
     {
+        $this->ensureObjectExists($object);
+
         $data = json_decode(json_encode($object), true);
         return [
             'data' => $data
@@ -39,18 +42,14 @@ class BaseController
         return $records;
     }
 
-/*    protected function getPaginatedRecords(Base $model)
+    /**
+     * @param $object
+     * @throws NotFoundException
+     */
+    private function ensureObjectExists($object): void
     {
-//        $numberOfRecords = $this->pdoConnection->query($model->generateCountSql());
-//        $queryParams = $this->request->getQueryParams();
-//
-//        $page = isset($queryParams['page']) ? (int) $queryParams['page'] : 1;
-//        $perPage = isset($queryParams['number']) ? (int) $queryParams['number'] : 20;
-//        $pageCount = ceil($numberOfRecords/$perPage);
+        if (!isset($object))
+            throw new NotFoundException("The requested resource doesn't exist on this server");
+    }
 
-//        $records = $model::whereBetween('id', [1, 20])->get();
-        $records = $model::paginate(10);
-
-        return $records;
-    }*/
 }
