@@ -26,7 +26,7 @@ class EventController extends BaseController
 
     public function getUpcomingEvents()
     {
-        $events = $this->getEverything($this->event);
+        $events = $this->getAllRecords($this->event);
 
         foreach ($events as $event) {
             $this->addEventDetails($event);

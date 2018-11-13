@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 
-use stdClass;
+use App\Models\Base;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest as Request;
 /**
