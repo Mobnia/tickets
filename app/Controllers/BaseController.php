@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 
 use App\Models\Base;
+use Illuminate\Database\Eloquent\Collection;
 use League\Route\Http\Exception\NotFoundException;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest as Request;
@@ -48,8 +49,18 @@ class BaseController
      */
     private function ensureObjectExists($object): void
     {
-        if (!isset($object))
+        $boolean = true;
+
+        if ($object instanceof  Collection) {
+            $boolean = empty($object->all()) ? false : true;
+        }
+        else if (!isset($object)) {
+            $boolean = true;
+        }
+
+        if ($boolean == false) {
             throw new NotFoundException("The requested resource doesn't exist on this server");
+        }
     }
 
 }
