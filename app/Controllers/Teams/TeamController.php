@@ -38,10 +38,10 @@ class TeamController extends BaseController
 
     public function getTeam(ServerRequestInterface $request, $args)
     {
-        $id = $args['id'];
-        $team = $this->team::find($id);
+        $teamId = $args['id'];
+        $team = $this->team::find($teamId);
 
-        $this->addTeamDetails($team);
+        if(isset($team)) $this->addTeamDetails($team);
 
         return $this->convertObjectToArray($team);
     }

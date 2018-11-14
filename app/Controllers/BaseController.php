@@ -53,7 +53,7 @@ class BaseController
             $boolean = empty($object->all()) ? false : true;
         }
         else if (!isset($object)) {
-            $boolean = true;
+            $boolean = false;
         }
 
         if ($boolean == false) {

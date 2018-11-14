@@ -37,9 +37,11 @@ class EventController extends BaseController
 
     public function getEvent(ServerRequest $request, $args)
     {
-        $id = $args['id'];
-        $event = $this->event::find($id);
-        $this->addEventDetails($event);
+        $eventId = $args['id'];
+        $event = $this->event::find($eventId);
+
+        if(isset($event)) $this->addEventDetails($event);
+
         return $this->convertObjectToArray($event);
     }
 
