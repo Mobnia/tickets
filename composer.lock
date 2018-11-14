@@ -4,8 +4,62 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4b2adc466af9ac8f2035d983946b6103",
+    "content-hash": "449bbce295ae69db47ec86bcbd70c047",
     "packages": [
+        {
+            "name": "aura/filter",
+            "version": "3.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/auraphp/Aura.Filter.git",
+                "reference": "664d3ebc504e1e7002f2653509411cff29550009"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/auraphp/Aura.Filter/zipball/664d3ebc504e1e7002f2653509411cff29550009",
+                "reference": "664d3ebc504e1e7002f2653509411cff29550009",
+                "shasum": ""
+            },
+            "require": {
+                "ext-libxml": "*",
+                "php": ">=5.5.0",
+                "psr/http-message": "~1.0"
+            },
+            "require-dev": {
+                "zendframework/zend-diactoros": "~1.0"
+            },
+            "suggest": {
+                "ext-iconv": "To support UTF-8 in string-length filters.",
+                "ext-intl": "To support IDNs in email filters.",
+                "ext-mbstring": "To support UTF-8 in string-length filters."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aura\\Filter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aura.Filter Contributors",
+                    "homepage": "https://github.com/auraphp/Aura.Filter/contributors"
+                }
+            ],
+            "description": "Filters to validate and sanitize objects and arrays.",
+            "homepage": "https://github.com/auraphp/Aura.Filter",
+            "keywords": [
+                "filter",
+                "sanitize",
+                "validate",
+                "validation",
+                "validator"
+            ],
+            "time": "2016-05-21T14:29:00+00:00"
+        },
         {
             "name": "doctrine/inflector",
             "version": "v1.3.0",
@@ -455,75 +509,6 @@
                 "routing"
             ],
             "time": "2018-02-13T20:26:39+00:00"
-        },
-        {
-            "name": "pagerfanta/pagerfanta",
-            "version": "v2.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/whiteoctober/Pagerfanta.git",
-                "reference": "15770d9d7f6e8e07af568aed104a51f869591e73"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/whiteoctober/Pagerfanta/zipball/15770d9d7f6e8e07af568aed104a51f869591e73",
-                "reference": "15770d9d7f6e8e07af568aed104a51f869591e73",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0"
-            },
-            "require-dev": {
-                "doctrine/orm": "~2.3",
-                "doctrine/phpcr-odm": "1.*",
-                "jackalope/jackalope-doctrine-dbal": "1.*",
-                "jmikola/geojson": "~1.0",
-                "mandango/mandango": "~1.0@dev",
-                "mandango/mondator": "~1.0@dev",
-                "phpunit/phpunit": "^5.7|^6",
-                "propel/propel": "~2.0@dev",
-                "propel/propel1": "~1.6",
-                "ruflin/elastica": "~1.3",
-                "solarium/solarium": "~3.1"
-            },
-            "suggest": {
-                "doctrine/mongodb-odm": "To use the DoctrineODMMongoDBAdapter.",
-                "doctrine/orm": "To use the DoctrineORMAdapter.",
-                "doctrine/phpcr-odm": "To use the DoctrineODMPhpcrAdapter. >= 1.1.0",
-                "mandango/mandango": "To use the MandangoAdapter.",
-                "propel/propel": "To use the Propel2Adapter",
-                "propel/propel1": "To use the PropelAdapter",
-                "solarium/solarium": "To use the SolariumAdapter."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Pagerfanta\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Pablo Díez",
-                    "email": "pablodip@gmail.com"
-                }
-            ],
-            "description": "Pagination for PHP 5.3",
-            "keywords": [
-                "page",
-                "pagination",
-                "paginator",
-                "paging"
-            ],
-            "time": "2018-05-17T09:23:52+00:00"
         },
         {
             "name": "psr/container",
@@ -1292,6 +1277,75 @@
                 "object graph"
             ],
             "time": "2018-06-11T23:09:50+00:00"
+        },
+        {
+            "name": "pagerfanta/pagerfanta",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/whiteoctober/Pagerfanta.git",
+                "reference": "15770d9d7f6e8e07af568aed104a51f869591e73"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/whiteoctober/Pagerfanta/zipball/15770d9d7f6e8e07af568aed104a51f869591e73",
+                "reference": "15770d9d7f6e8e07af568aed104a51f869591e73",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "doctrine/orm": "~2.3",
+                "doctrine/phpcr-odm": "1.*",
+                "jackalope/jackalope-doctrine-dbal": "1.*",
+                "jmikola/geojson": "~1.0",
+                "mandango/mandango": "~1.0@dev",
+                "mandango/mondator": "~1.0@dev",
+                "phpunit/phpunit": "^5.7|^6",
+                "propel/propel": "~2.0@dev",
+                "propel/propel1": "~1.6",
+                "ruflin/elastica": "~1.3",
+                "solarium/solarium": "~3.1"
+            },
+            "suggest": {
+                "doctrine/mongodb-odm": "To use the DoctrineODMMongoDBAdapter.",
+                "doctrine/orm": "To use the DoctrineORMAdapter.",
+                "doctrine/phpcr-odm": "To use the DoctrineODMPhpcrAdapter. >= 1.1.0",
+                "mandango/mandango": "To use the MandangoAdapter.",
+                "propel/propel": "To use the Propel2Adapter",
+                "propel/propel1": "To use the PropelAdapter",
+                "solarium/solarium": "To use the SolariumAdapter."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Pagerfanta\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pablo Díez",
+                    "email": "pablodip@gmail.com"
+                }
+            ],
+            "description": "Pagination for PHP 5.3",
+            "keywords": [
+                "page",
+                "pagination",
+                "paginator",
+                "paging"
+            ],
+            "time": "2018-05-17T09:23:52+00:00"
         },
         {
             "name": "pdepend/pdepend",
@@ -2998,10 +3052,14 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "aura/filter": 20,
         "phpmd/phpmd": 0
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-json": "*",
+        "ext-pdo": "*"
+    },
     "platform-dev": []
 }

@@ -2,8 +2,10 @@
 
 use App\Providers\DatabaseProvider;
 use App\Providers\RouterServiceProvider;
+use App\Providers\ValidationProvider;
 
 return [
     RouterServiceProvider::class,
-    DatabaseProvider::class
+    DatabaseProvider::class,
+    ValidationProvider::class
 ];
