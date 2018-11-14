@@ -7,9 +7,7 @@ use App\Controllers\BaseController;
 use App\Models\Ticket;
 use Aura\Filter\ValueFilter;
 use League\Route\Http\Exception\BadRequestException;
-use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest as Request;
-use Zend\Diactoros\ServerRequest;
 
 /**
  * Class TicketController
@@ -29,14 +27,13 @@ class TicketController extends BaseController
     public function getTicketsForEvent(Request $request, $args)
     {
         $eventId = $args['id'];
-        $tickets = $this->tickets::where('sporting_event_id', $eventId)->where('ticketholder_id', null)->get();
+        $tickets = $this->tickets->where('sporting_event_id', $eventId)->where('ticketholder_id', null)->get();
         return $this->convertObjectToArray($tickets);
     }
 
-    public function buyTicket(ServerRequest $request, $args)
+    public function buyTicket(Request $request, $args)
     {
-        $requestBody = $this->getRequestBody($request);
-        $buyer = $requestBody->buyerId;
+        $buyer = $this->getBuyer($request);
         $ticketId = $args['id'];
 
         $this->verifyBuyer($buyer);
@@ -46,16 +43,25 @@ class TicketController extends BaseController
         return $this->convertObjectToArray($ticket);
     }
 
+    private function getBuyer(Request $request)
+    {
+        $requestBody = $this->getRequestBody($request);
+        $buyer = $requestBody->buyerId;
+        return $buyer;
+    }
+
+    private function getRequestBody(Request $request)
+    {
+        $requestBody = json_decode($request->getBody()->getContents());
+        $this->validateRequest($requestBody->buyerId);
+        return $requestBody;
+    }
+
     private function validateRequest($buyerId): void
     {
         if (!$this->filter->validate($buyerId, 'int')) {
             throw new BadRequestException('The supplied buyer id is inaccurate');
         }
-    }
-
-    private function getRequestBody(ServerRequest $request)
-    {
-        return json_decode($request->getBody()->getContents());
     }
 
     private function verifyBuyer($buyer)

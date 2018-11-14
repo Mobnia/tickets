@@ -5,6 +5,7 @@ namespace App\Test\unit\Controllers;
 
 use App\Controllers\Tickets\TicketController;
 use App\Models\Ticket;
+use League\Route\Http\Exception\BadRequestException;
 use League\Route\Http\Exception\NotFoundException;
 use Zend\Diactoros\StreamFactory;
 
@@ -35,11 +36,28 @@ class TicketControllerTest extends BaseController
 
     public function testBuyTicket()
     {
-        $responseBody = [
+        $body = [
             'buyerId' => 1,
         ];
-        $stream = (new StreamFactory())->createStream(json_encode($responseBody));
-        $request = $this->request->withBody($stream);
+        $request = $this->addBodyToRequest($body);
         $this->assertArrayHasKey('data', $this->ticketController->buyTicket($request, ['id' => 5589]));
+    }
+
+    public function testBuyTicketWithWrongID()
+    {
+        $body = [
+            'buyerId' => 'abcd',
+        ];
+        $request = $this->addBodyToRequest($body);
+
+        $this->expectException(BadRequestException::class);
+        $this->ticketController->buyTicket($request, ['id' => 5589]);
+    }
+
+    private function addBodyToRequest($body)
+    {
+        $stream = (new StreamFactory())->createStream(json_encode($body));
+        $request = $this->request->withBody($stream);
+        return $request;
     }
 }
