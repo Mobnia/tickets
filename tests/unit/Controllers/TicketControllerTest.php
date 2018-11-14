@@ -5,6 +5,7 @@ namespace App\Test\unit\Controllers;
 
 use App\Controllers\Tickets\TicketController;
 use App\Models\Ticket;
+use Zend\Diactoros\StreamFactory;
 
 /**
  * Class TicketControllerTest
@@ -26,5 +27,15 @@ class TicketControllerTest extends BaseController
     public function testGetTickets()
     {
         $this->assertArrayHasKey('data', $this->ticketController->getTicketsForEvent($this->request, 3));
+    }
+
+    public function testBuyTicket()
+    {
+        $responseBody = [
+            'buyerId' => 1,
+        ];
+        $stream = (new StreamFactory())->createStream(json_encode($responseBody));
+        $request = $this->request->withBody($stream);
+        $this->assertArrayHasKey('data', $this->ticketController->buyTicket($request, ['id' => 5589]));
     }
 }
