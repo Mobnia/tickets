@@ -5,6 +5,7 @@ namespace App\Test\unit\Controllers;
 
 use App\Controllers\Tickets\TicketController;
 use App\Models\Ticket;
+use League\Route\Http\Exception\NotFoundException;
 use Zend\Diactoros\StreamFactory;
 
 /**
@@ -26,7 +27,10 @@ class TicketControllerTest extends BaseController
 
     public function testGetTickets()
     {
-        $this->assertArrayHasKey('data', $this->ticketController->getTicketsForEvent($this->request, 3));
+        //$this->assertArrayHasKey('data', $this->ticketController->getTicketsForEvent($this->request, 1));
+
+        $this->expectException(NotFoundException::class);
+        $this->ticketController->getTicketsForEvent($this->request, 0);
     }
 
     public function testBuyTicket()
