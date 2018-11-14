@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 
+use League\Route\RouteGroup;
 use League\Route\Router;
 use League\Route\Strategy\JsonStrategy;
 use Zend\Diactoros\ResponseFactory;
@@ -11,8 +12,11 @@ if (!isset($arr["container"])) {
 $container = $arr['container'];
 
 $responseFactory = new ResponseFactory();
-$routerStrategy = (new JsonStrategy($responseFactory))->setContainer($container);
-$router = (new Router())->setStrategy($routerStrategy);
+$routerStrategy = new JsonStrategy($responseFactory);
+$router = new Router();
+
+$routerStrategy->setContainer($container);
+$router->setStrategy($routerStrategy);
 
 $router->get('/', function () {
     return [
@@ -21,7 +25,7 @@ $router->get('/', function () {
     ];
 });
 
-$router->group('/', function ($router) {
+$router->group('/', function (RouteGroup $router) {
     $router->get('/events', '\App\Controllers\Events\EventController::getUpcomingEvents');
     $router->get('/events/{id:number}', '\App\Controllers\Events\EventController::getEvent');
     $router->get('/events/{id:number}/tickets', '\App\Controllers\Tickets\TicketController::getTicketsForEvent');
