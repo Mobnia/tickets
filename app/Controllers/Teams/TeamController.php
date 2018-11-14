@@ -5,6 +5,7 @@ namespace App\Controllers\Teams;
 
 use App\Controllers\BaseController;
 use App\Models\Team;
+use Aura\Filter\ValueFilter;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest as Request;
@@ -18,11 +19,11 @@ class TeamController extends BaseController
 {
     private $team;
 
-    public function __construct(Request $request, Team $team)
+    public function __construct(ValueFilter $filter, Team $team)
     {
         $this->team = $team;
 
-        parent::__construct($request);
+        parent::__construct($filter);
     }
 
     public function getTeams()
@@ -36,7 +37,7 @@ class TeamController extends BaseController
         return $this->convertObjectToArray($teams);
     }
 
-    public function getTeam(ServerRequestInterface $request, $args)
+    public function getTeam(Request $request, $args)
     {
         $teamId = $args['id'];
         $team = $this->team::find($teamId);
@@ -48,6 +49,6 @@ class TeamController extends BaseController
 
     protected function addTeamDetails($team)
     {
-        if(isset($team)) $team->location;
+        $team->location;
     }
 }

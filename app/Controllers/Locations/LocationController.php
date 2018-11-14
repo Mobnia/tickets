@@ -5,6 +5,7 @@ namespace App\Controllers\Locations;
 
 use App\Controllers\BaseController;
 use App\Models\Location;
+use Aura\Filter\ValueFilter;
 use Zend\Diactoros\ServerRequest as Request;
 
 /**
@@ -16,11 +17,11 @@ class LocationController extends BaseController
 {
     private $locations;
 
-    public function __construct(Request $request, Location $location)
+    public function __construct(ValueFilter $filter, Location $location)
     {
         $this->locations = $location;
 
-        parent::__construct($request);
+        parent::__construct($filter);
     }
 
     public function getLocations()

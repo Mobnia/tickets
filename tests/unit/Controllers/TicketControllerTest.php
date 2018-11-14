@@ -22,7 +22,7 @@ class TicketControllerTest extends BaseController
     {
         parent::__construct($name, $data, $dataName);
         $this->ticket = new Ticket();
-        $this->ticketController = new TicketController($this->request, $this->ticket);
+        $this->ticketController = new TicketController($this->filter, $this->ticket);
     }
 
     public function testGetTickets()

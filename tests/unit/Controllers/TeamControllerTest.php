@@ -22,7 +22,7 @@ class TeamControllerTest extends BaseController
         parent::__construct($name, $data, $dataName); // request and response are constructed in the parent
 
         $this->team = new Team();
-        $this->teamController = new TeamController($this->request, $this->team);
+        $this->teamController = new TeamController($this->filter, $this->team);
     }
 
     public function testGetTeams()

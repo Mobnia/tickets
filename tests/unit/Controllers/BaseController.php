@@ -3,9 +3,9 @@
 namespace App\Test\unit\Controllers;
 
 
+use Aura\Filter\FilterFactory;
 use Illuminate\Database\Capsule\Manager;
 use PHPUnit\Framework\TestCase;
-use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 
 /**
@@ -16,12 +16,13 @@ use Zend\Diactoros\ServerRequest;
 class BaseController extends TestCase
 {
     protected $request;
-    protected $response;
+    protected $filter;
 
     public function __construct(?string $name = null, array $data = [], string $dataName = '')
     {
         // TODO: Stop mocking what you don't own
         $this->request = new ServerRequest();
+        $this->filter = (new FilterFactory())->newValueFilter();
 
         parent::__construct($name, $data, $dataName);
     }

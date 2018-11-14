@@ -23,7 +23,7 @@ class LocationControllerTest extends BaseController
         parent::__construct($name, $data, $dataName);
 
         $this->location = new Location();
-        $this->locationController = new LocationController($this->request, $this->location);
+        $this->locationController = new LocationController($this->filter, $this->location);
     }
 
     public function testGetLocations()

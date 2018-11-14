@@ -5,9 +5,8 @@ namespace App\Controllers\Events;
 
 use App\Controllers\BaseController;
 use App\Models\Event;
-use Zend\Diactoros\Response;
+use Aura\Filter\ValueFilter;
 use Zend\Diactoros\ServerRequest as Request;
-use Zend\Diactoros\ServerRequest;
 
 /**
  * Class EventController
@@ -18,10 +17,10 @@ class EventController extends BaseController
 {
     private $event;
 
-    public function __construct(Request $request, Event $event)
+    public function __construct(ValueFilter $filter, Event $event)
     {
         $this->event = $event;
-        parent::__construct($request);
+        parent::__construct($filter);
     }
 
     public function getUpcomingEvents()
@@ -35,7 +34,7 @@ class EventController extends BaseController
         return $this->convertObjectToArray($events);
     }
 
-    public function getEvent(ServerRequest $request, $args)
+    public function getEvent(Request $request, $args)
     {
         $eventId = $args['id'];
         $event = $this->event::find($eventId);

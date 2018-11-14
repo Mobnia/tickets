@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 
 use App\Models\Base;
+use Aura\Filter\ValueFilter;
 use Illuminate\Database\Eloquent\Collection;
 use League\Route\Http\Exception\NotFoundException;
 use Zend\Diactoros\Response;
@@ -15,11 +16,11 @@ use Zend\Diactoros\ServerRequest as Request;
  */
 class BaseController
 {
-    protected $request;
+    protected $filter;
 
-    public function __construct(Request $request)
+    public function __construct(ValueFilter $filter)
     {
-        $this->request = $request;
+        $this->filter = $filter;
     }
 
     public function convertObjectToArray($object): array
