@@ -18,10 +18,10 @@ class TicketController extends BaseController
 {
     private $tickets;
 
-    public function __construct(Request $request, Response $response, Ticket $ticket)
+    public function __construct(Request $request, Ticket $ticket)
     {
         $this->tickets = $ticket;
-        parent::__construct($request, $response);
+        parent::__construct($request);
     }
 
     public function getTicketsForEvent(ServerRequest $request, $args)

@@ -18,11 +18,11 @@ class TeamController extends BaseController
 {
     private $team;
 
-    public function __construct(Request $request, Response $response, Team $team)
+    public function __construct(Request $request, Team $team)
     {
         $this->team = $team;
 
-        parent::__construct($request, $response);
+        parent::__construct($request);
     }
 
     public function getTeams()

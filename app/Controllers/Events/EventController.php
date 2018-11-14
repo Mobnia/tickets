@@ -18,10 +18,10 @@ class EventController extends BaseController
 {
     private $event;
 
-    public function __construct(Request $request, Response $response, Event $event)
+    public function __construct(Request $request, Event $event)
     {
         $this->event = $event;
-        parent::__construct($request, $response);
+        parent::__construct($request);
     }
 
     public function getUpcomingEvents()

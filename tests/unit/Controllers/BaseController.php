@@ -22,7 +22,6 @@ class BaseController extends TestCase
     {
         // TODO: Stop mocking what you don't own
         $this->request = new ServerRequest();
-        $this->response = new Response();
 
         parent::__construct($name, $data, $dataName);
     }

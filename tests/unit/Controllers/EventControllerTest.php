@@ -21,7 +21,7 @@ class EventControllerTest extends BaseController
         parent::__construct($name, $data, $dataName); // request and response are constructed in the parent
 
         $this->event = new Event();
-        $this->eventController = new EventController($this->request, $this->response, $this->event);
+        $this->eventController = new EventController($this->request, $this->event);
     }
 
     public function testGetUpcomingEvents()

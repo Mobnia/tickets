@@ -16,12 +16,10 @@ use Zend\Diactoros\ServerRequest as Request;
 class BaseController
 {
     protected $request;
-    protected $response;
 
-    public function __construct(Request $request, Response $response)
+    public function __construct(Request $request)
     {
         $this->request = $request;
-        $this->response = $response;
     }
 
     public function convertObjectToArray($object): array
