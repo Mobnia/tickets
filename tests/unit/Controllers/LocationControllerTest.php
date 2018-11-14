@@ -6,6 +6,7 @@ namespace App\Test\unit\Controllers;
 
 use App\Controllers\Locations\LocationController;
 use App\Models\Location;
+use League\Route\Http\Exception\NotFoundException;
 
 /**
  * Class LocationControllerTest
@@ -28,5 +29,13 @@ class LocationControllerTest extends BaseController
     public function testGetLocations()
     {
         $this->assertArrayHasKey('data', $this->locationController->getLocations());
+    }
+
+    public function testGetLocation()
+    {
+        $this->assertArrayHasKey('data', $this->locationController->getLocation($this->request, ['id' => 1]));
+
+        $this->expectException(NotFoundException::class);
+        $this->assertArrayHasKey('data', $this->locationController->getLocation($this->request, ['id' => 0]));
     }
 }

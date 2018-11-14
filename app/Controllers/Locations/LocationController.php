@@ -34,6 +34,16 @@ class LocationController extends BaseController
         return $this->convertObjectToArray($locations);
     }
 
+    public function getLocation(Request $request, $args)
+    {
+        $locationId = $args['id'];
+        $location = $this->locations::find($locationId);
+
+        if(isset($location)) $this->addLocationDetails($location);
+
+        return $this->convertObjectToArray($location);
+    }
+
     public function addLocationDetails($location)
     {
         $location->events;
