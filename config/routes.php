@@ -28,6 +28,7 @@ $router->group('/', function ($router) {
     $router->put('/tickets/{id:number}', '\App\Controllers\Tickets\TicketController::buyTicket');
     $router->get('/teams', '\App\Controllers\Teams\TeamController::getTeams');
     $router->get('/teams/{id:number}', '\App\Controllers\Teams\TeamController::getTeam');
+    $router->get('/locations', '\App\Controllers\Locations\LocationController::getLocations');
 });
 
 return $router;

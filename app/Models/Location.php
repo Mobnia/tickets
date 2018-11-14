@@ -13,4 +13,9 @@ class Location extends Base
     protected $table = 'sport_location';
 
     const MORPH_NAME = 'location';
+
+    public function events()
+    {
+        return $this->hasMany(Event::class, 'location_id');
+    }
 }
