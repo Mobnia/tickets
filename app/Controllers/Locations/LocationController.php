@@ -24,15 +24,17 @@ class LocationController extends BaseController
         parent::__construct($filter);
     }
 
-    public function getLocations()
+    public function getLocations(Request $request)
     {
         $locations = $this->getAllRecords($this->locations);
+
+        $page = $this->getPage($request);
 
         foreach ($locations as $location) {
             $this->addLocationDetails($location);
         }
 
-        return $this->returnResponse($locations);
+        return $this->returnResponse($locations, $page);
     }
 
     public function getLocation(Request $request, $args)

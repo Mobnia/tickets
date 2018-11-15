@@ -26,7 +26,7 @@ class EventControllerTest extends BaseController
 
     public function testGetUpcomingEvents()
     {
-        $this->assertArrayHasKey('data', $this->eventController->getUpcomingEvents());
+        $this->assertArrayHasKey('data', $this->eventController->getUpcomingEvents($this->request));
     }
 
     public function testGetAnEvent()

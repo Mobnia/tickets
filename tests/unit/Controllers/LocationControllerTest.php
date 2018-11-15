@@ -28,7 +28,7 @@ class LocationControllerTest extends BaseController
 
     public function testGetLocations()
     {
-        $this->assertArrayHasKey('data', $this->locationController->getLocations());
+        $this->assertArrayHasKey('data', $this->locationController->getLocations($this->request));
     }
 
     public function testGetLocation()

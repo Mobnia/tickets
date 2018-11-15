@@ -27,7 +27,7 @@ class TeamControllerTest extends BaseController
 
     public function testGetTeams()
     {
-        $this->assertArrayHasKey('data', $this->teamController->getTeams());
+        $this->assertArrayHasKey('data', $this->teamController->getTeams($this->request));
     }
 
     public function testGetTeam()

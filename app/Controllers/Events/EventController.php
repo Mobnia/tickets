@@ -23,15 +23,17 @@ class EventController extends BaseController
         parent::__construct($filter);
     }
 
-    public function getUpcomingEvents()
+    public function getUpcomingEvents(Request $request)
     {
         $events = $this->getAllRecords($this->event);
+
+        $page = $this->getPage($request);
 
         foreach ($events as $event) {
             $this->addEventDetails($event);
         }
 
-        return $this->returnResponse($events);
+        return $this->returnResponse($events, $page);
     }
 
     public function getEvent(Request $request, $args)
