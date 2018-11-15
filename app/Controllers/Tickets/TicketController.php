@@ -80,7 +80,7 @@ class TicketController extends BaseController
     {
         $ticket = $this->tickets::find($ticketId);
         $ticket->ticketholder_id = $buyer;
-        $ticket->save;
+        $ticket->save();
 
         return $ticket;
     }
