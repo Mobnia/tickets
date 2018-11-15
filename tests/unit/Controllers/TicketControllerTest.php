@@ -4,6 +4,7 @@ namespace App\Test\unit\Controllers;
 
 
 use App\Controllers\Tickets\TicketController;
+use App\Controllers\Tickets\TicketPurchaseController;
 use App\Models\Ticket;
 use League\Route\Http\Exception\BadRequestException;
 use League\Route\Http\Exception\NotFoundException;
@@ -18,12 +19,14 @@ class TicketControllerTest extends BaseController
 {
     private $ticket;
     private $ticketController;
+    private $ticketPurchaseController;
 
     public function __construct(?string $name = null, array $data = [], string $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
         $this->ticket = new Ticket();
         $this->ticketController = new TicketController($this->filter, $this->ticket);
+        $this->ticketPurchaseController = new TicketPurchaseController($this->filter, $this->ticket);
     }
 
     public function testGetTickets()
@@ -40,7 +43,7 @@ class TicketControllerTest extends BaseController
             'buyerId' => 1,
         ];
         $request = $this->addBodyToRequest($body);
-        $this->assertArrayHasKey('data', $this->ticketController->buyTicket($request, ['id' => 5589]));
+        $this->assertArrayHasKey('data', $this->ticketPurchaseController->buyTicket($request, ['id' => 5589]));
     }
 
     public function testBuyTicketWithWrongID()
@@ -51,7 +54,7 @@ class TicketControllerTest extends BaseController
         $request = $this->addBodyToRequest($body);
 
         $this->expectException(BadRequestException::class);
-        $this->ticketController->buyTicket($request, ['id' => 5589]);
+        $this->ticketPurchaseController->buyTicket($request, ['id' => 5589]);
     }
 
     public function testBuyTicketWithNoID()
@@ -59,7 +62,7 @@ class TicketControllerTest extends BaseController
         $request = $this->addBodyToRequest([]);
 
         $this->expectException(BadRequestException::class);
-        $this->ticketController->buyTicket($request, ['id' => 5589]);
+        $this->ticketPurchaseController->buyTicket($request, ['id' => 5589]);
     }
 
     private function addBodyToRequest($body)
