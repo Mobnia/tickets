@@ -31,7 +31,7 @@ class EventController extends BaseController
             $this->addEventDetails($event);
         }
 
-        return $this->convertObjectToArray($events);
+        return $this->returnResponse($events);
     }
 
     public function getEvent(Request $request, $args)
@@ -41,7 +41,7 @@ class EventController extends BaseController
 
         if(isset($event)) $this->addEventDetails($event);
 
-        return $this->convertObjectToArray($event);
+        return $this->returnResponse($event);
     }
 
     /**

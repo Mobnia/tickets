@@ -28,7 +28,7 @@ class TicketController extends BaseController
     {
         $eventId = $args['id'];
         $tickets = $this->tickets->where('sporting_event_id', $eventId)->where('ticketholder_id', null)->get();
-        return $this->convertObjectToArray($tickets);
+        return $this->returnResponse($tickets);
     }
 
     public function buyTicket(Request $request, $args)
@@ -40,7 +40,7 @@ class TicketController extends BaseController
 
         $ticket = $this->processPurchase($ticketId, $buyer);
 
-        return $this->convertObjectToArray($ticket);
+        return $this->returnResponse($ticket);
     }
 
     private function getBuyer(Request $request)

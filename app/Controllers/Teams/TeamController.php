@@ -34,7 +34,7 @@ class TeamController extends BaseController
             $this->addTeamDetails($team);
         }
 
-        return $this->convertObjectToArray($teams);
+        return $this->returnResponse($teams);
     }
 
     public function getTeam(Request $request, $args)
@@ -44,7 +44,7 @@ class TeamController extends BaseController
 
         if(isset($team)) $this->addTeamDetails($team);
 
-        return $this->convertObjectToArray($team);
+        return $this->returnResponse($team);
     }
 
     protected function addTeamDetails($team)

@@ -32,7 +32,7 @@ class LocationController extends BaseController
             $this->addLocationDetails($location);
         }
 
-        return $this->convertObjectToArray($locations);
+        return $this->returnResponse($locations);
     }
 
     public function getLocation(Request $request, $args)
@@ -42,7 +42,7 @@ class LocationController extends BaseController
 
         if(isset($location)) $this->addLocationDetails($location);
 
-        return $this->convertObjectToArray($location);
+        return $this->returnResponse($location);
     }
 
     public function addLocationDetails($location)
