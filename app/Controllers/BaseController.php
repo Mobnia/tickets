@@ -7,6 +7,7 @@ use App\Models\Base;
 use Aura\Filter\ValueFilter;
 use Illuminate\Database\Eloquent\Collection;
 use League\Route\Http\Exception\NotFoundException;
+use Zend\Diactoros\ServerRequest as Request;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 
@@ -44,6 +45,13 @@ class BaseController
     {
         $records = $model::all();
         return $records;
+    }
+
+    protected function getPage(Request $request): int
+    {
+        $queries = $request->getQueryParams();
+        $page = isset($queries['page']) ? (int) $queries['page'] : 1;
+        return $page;
     }
 
     private function convertObjectToArray($object)

@@ -27,8 +27,11 @@ class TicketController extends BaseController
     public function getTicketsForEvent(Request $request, $args)
     {
         $eventId = $args['id'];
+        $page = $this->getPage($request);
+
         $tickets = $this->tickets->where('sporting_event_id', $eventId)->where('ticketholder_id', null)->get();
-        return $this->returnResponse($tickets);
+
+        return $this->returnResponse($tickets, $page);
     }
 
     public function buyTicket(Request $request, $args)
