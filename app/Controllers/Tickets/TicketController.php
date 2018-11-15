@@ -53,15 +53,22 @@ class TicketController extends BaseController
     private function getRequestBody(Request $request)
     {
         $requestBody = json_decode($request->getBody()->getContents());
-        $this->validateRequest($requestBody->buyerId);
+        $this->ensureRequestDataExists($requestBody);
+        $this->validateRequest($requestBody->buyerId, 'int');
         return $requestBody;
     }
 
-    private function validateRequest($buyerId): void
+    private function validateRequest($buyerId, $rule): void
     {
-        if (!$this->filter->validate($buyerId, 'int')) {
-            throw new BadRequestException('The supplied buyer id is inaccurate');
+        if (!$this->filter->validate($buyerId, $rule)) {
+            throw new BadRequestException('The supplied request is invalid');
         }
+    }
+
+    private function ensureRequestDataExists($body)
+    {
+        if (!isset($body->buyerId))
+            throw new BadRequestException('The supplied request is invalid');
     }
 
     private function verifyBuyer($buyer)

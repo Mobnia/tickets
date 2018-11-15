@@ -54,6 +54,14 @@ class TicketControllerTest extends BaseController
         $this->ticketController->buyTicket($request, ['id' => 5589]);
     }
 
+    public function testBuyTicketWithNoID()
+    {
+        $request = $this->addBodyToRequest([]);
+
+        $this->expectException(BadRequestException::class);
+        $this->ticketController->buyTicket($request, ['id' => 5589]);
+    }
+
     private function addBodyToRequest($body)
     {
         $stream = (new StreamFactory())->createStream(json_encode($body));
