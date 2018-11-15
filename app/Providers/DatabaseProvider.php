@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\Location;
 use App\Models\Team;
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Database\Capsule\Manager;
 use Illuminate\Database\Eloquent\Relations\Relation;
 /**
@@ -62,7 +63,8 @@ class DatabaseProvider extends AbstractServiceProvider
             Event::MORPH_NAME => Event::class,
             Team::MORPH_NAME => Team::class,
             Location::MORPH_NAME => Location::class,
-            Ticket::MORPH_NAME => Ticket::class
+            Ticket::MORPH_NAME => Ticket::class,
+            User::MORPH_NAME => User::class
         ]);
     }
 }

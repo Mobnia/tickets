@@ -6,7 +6,6 @@ namespace App\Controllers\Tickets;
 use App\Controllers\BaseController;
 use App\Models\Ticket;
 use Aura\Filter\ValueFilter;
-use League\Route\Http\Exception\BadRequestException;
 use Zend\Diactoros\ServerRequest as Request;
 
 /**

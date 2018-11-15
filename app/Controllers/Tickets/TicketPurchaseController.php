@@ -5,6 +5,7 @@ namespace App\Controllers\Tickets;
 
 use App\Controllers\BaseController;
 use App\Models\Ticket;
+use App\Models\User;
 use Aura\Filter\ValueFilter;
 use League\Route\Http\Exception\BadRequestException;
 use Zend\Diactoros\ServerRequest as Request;
@@ -66,7 +67,9 @@ class TicketPurchaseController extends BaseController
 
     private function verifyBuyer($buyer)
     {
-        return null;
+        $ticket = User::find($buyer);
+        if (!isset($ticket))
+            throw new BadRequestException('This user doesn\'t exist');
     }
 
     private function processPurchase($ticketId, $buyer)
