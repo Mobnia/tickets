@@ -29,11 +29,15 @@ $router->group('/', function (RouteGroup $router) {
     $router->get('/events', '\App\Controllers\Events\EventController::getUpcomingEvents');
     $router->get('/events/{id:number}', '\App\Controllers\Events\EventController::getEvent');
     $router->get('/events/{id:number}/tickets', '\App\Controllers\Tickets\TicketController::getTicketsForEvent');
+
     $router->put('/tickets/{id:number}', '\App\Controllers\Tickets\TicketPurchaseController::buyTicket');
+
     $router->get('/teams', '\App\Controllers\Teams\TeamController::getTeams');
     $router->get('/teams/{id:number}', '\App\Controllers\Teams\TeamController::getTeam');
+
     $router->get('/locations', '\App\Controllers\Locations\LocationController::getLocations');
     $router->get('/locations/{id:number}', '\App\Controllers\Locations\LocationController::getLocation');
-});
+
+})->middleware(new \App\Middleware\AuthenticationMiddleware());
 
 return $router;
