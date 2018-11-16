@@ -3,6 +3,8 @@
 namespace App\Models\Authentication;
 
 
+use App\Models\Base;
+
 /**
  * Class AccessToken
  *
@@ -16,7 +18,7 @@ namespace App\Models\Authentication;
  * @property \DateTime expires_date_time
  * @package \App\Models\Authentication
  */
-class AccessToken
+class AccessToken extends Base
 {
 //    private $id;
 //    private $userId;
