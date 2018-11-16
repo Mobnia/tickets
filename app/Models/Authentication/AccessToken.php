@@ -8,11 +8,11 @@ use App\Models\Base;
 /**
  * Class AccessToken
  *
- * @property string identifier
- * @property string userIdentifier
- * @property string clientIdentifier
- * @property array scopes
- * @property bool isRevoked
+ * @property string id
+ * @property string user_id
+ * @property string client_id
+ * @property string scopes
+ * @property bool is_revoked
  * @property \DateTime created_date_time
  * @property \DateTime updated_date_time
  * @property \DateTime expires_date_time
@@ -20,14 +20,6 @@ use App\Models\Base;
  */
 class AccessToken extends Base
 {
-//    private $id;
-//    private $userId;
-//    private $clientId;
-//    private $scopes;
-//    private $revoked;
-//    private $createdAt;
-//    private $updatedAt;
-//    private $expiresAt;
 
     protected $table = 'access_tokens';
 

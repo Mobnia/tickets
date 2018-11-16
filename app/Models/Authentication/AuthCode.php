@@ -8,12 +8,12 @@ use App\Models\Base;
 /**
  * Class AuthCode
  *
- * @property string identifier
- * @property string clientIdentifier
- * @property int|null|string userIdentifier
- * @property null|string redirectUri
- * @property array|mixed scopes
- * @property bool isRevoked
+ * @property string id
+ * @property string client_id
+ * @property int|null|string user_id
+ * @property null|string redirect_uri
+ * @property string scopes
+ * @property bool is_revoked
  * @property \DateTime created_date_time
  * @property \DateTime updated_date_time
  * @property \DateTime expires_date_time

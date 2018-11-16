@@ -49,11 +49,11 @@ class AccessTokenRepository implements AccessTokenRepositoryInterface
     public function persistNewAccessToken(AccessTokenEntityInterface $accessTokenEntity)
     {
         $accessToken = new ApplicationAccessToken();
-        $accessToken->identifier = $accessTokenEntity->getIdentifier();
-        $accessToken->userIdentifier = $accessTokenEntity->getUserIdentifier();
-        $accessToken->clientIdentifier = $accessTokenEntity->getClient()->getIdentifier();
-        $accessToken->scopes = $this->scopesToArray($accessTokenEntity->getScopes());
-        $accessToken->isRevoked = false;
+        $accessToken->id = $accessTokenEntity->getIdentifier();
+        $accessToken->user_id = $accessTokenEntity->getUserIdentifier();
+        $accessToken->client_id = $accessTokenEntity->getClient()->getIdentifier();
+        $accessToken->scopes = implode(' ', $this->scopesToArray($accessTokenEntity->getScopes()));
+        $accessToken->is_revoked = false;
         $accessToken->created_date_time = new \DateTime();
         $accessToken->updated_date_time = new \DateTime();
         $accessToken->expires_date_time = $accessTokenEntity->getExpiryDateTime();
@@ -74,7 +74,7 @@ class AccessTokenRepository implements AccessTokenRepositoryInterface
         if (!$accessToken)
             return;
 
-        $accessToken->isRevoked = true;
+        $accessToken->is_revoked = true;
         $accessToken->save();
     }
 
@@ -92,7 +92,7 @@ class AccessTokenRepository implements AccessTokenRepositoryInterface
         if (!$accessToken)
             return true;
 
-        return $accessToken->isRevoked;
+        return $accessToken->is_revoked;
     }
 
     private function scopesToArray(array $scopes): array

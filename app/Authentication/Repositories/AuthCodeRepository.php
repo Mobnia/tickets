@@ -46,12 +46,12 @@ class AuthCodeRepository implements AuthCodeRepositoryInterface
     {
         $authCode = new ApplicationAuthCode();
 
-        $authCode->identifier = $authCodeEntity->getIdentifier();
-        $authCode->userIdentifier = $authCodeEntity->getUserIdentifier();
-        $authCode->clientIdentifier = $authCodeEntity->getClient()->getIdentifier();
-        $authCode->scopes = $this->scopesToArray($authCodeEntity->getScopes());
-        $authCode->redirectUri = $authCodeEntity->getRedirectUri();
-        $authCode->isRevoked = false;
+        $authCode->id = $authCodeEntity->getIdentifier();
+        $authCode->user_id = $authCodeEntity->getUserIdentifier();
+        $authCode->client_id = $authCodeEntity->getClient()->getIdentifier();
+        $authCode->scopes = implode(' ', $this->scopesToArray($authCodeEntity->getScopes()));
+        $authCode->redirect_uri = $authCodeEntity->getRedirectUri();
+        $authCode->is_revoked = false;
         $authCode->created_date_time = new \DateTime();
         $authCode->updated_date_time = new \DateTime();
         $authCode->expires_date_time = $authCodeEntity->getExpiryDateTime();
@@ -72,7 +72,7 @@ class AuthCodeRepository implements AuthCodeRepositoryInterface
         if (!$authCode)
             return;
 
-        $authCode->isRevoked = true;
+        $authCode->is_revoked = true;
         $authCode->save();
     }
 
@@ -90,7 +90,7 @@ class AuthCodeRepository implements AuthCodeRepositoryInterface
         if (!$authCode)
             return true;
 
-        return $authCode->isRevoked;
+        return $authCode->is_revoked;
     }
 
     private function scopesToArray(array $scopes): array

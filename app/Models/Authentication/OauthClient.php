@@ -15,4 +15,14 @@ class OauthClient extends Base
     protected $table = 'oauth_clients';
 
     const MORPH_NAME = 'oauthClient';
+
+    public function accessTokens()
+    {
+        return $this->hasMany(AccessToken::class, 'client_id');
+    }
+
+    public function authCodes()
+    {
+        return $this->hasMany(AuthCode::class, 'client_id');
+    }
 }
