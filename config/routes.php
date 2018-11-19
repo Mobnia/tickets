@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 
+use App\Middleware\AuthenticationMiddleware;
 use League\Route\RouteGroup;
 use League\Route\Router;
 use League\Route\Strategy\JsonStrategy;
@@ -14,6 +15,7 @@ $container = $arr['container'];
 $responseFactory = new ResponseFactory();
 $routerStrategy = new JsonStrategy($responseFactory);
 $router = new Router();
+$authenticationMiddleware = $container->make(AuthenticationMiddleware::class);
 
 $routerStrategy->setContainer($container);
 $router->setStrategy($routerStrategy);
@@ -38,6 +40,6 @@ $router->group('/', function (RouteGroup $router) {
     $router->get('/locations', '\App\Controllers\Locations\LocationController::getLocations');
     $router->get('/locations/{id:number}', '\App\Controllers\Locations\LocationController::getLocation');
 
-})->middleware(new \App\Middleware\AuthenticationMiddleware());
+})->middleware($authenticationMiddleware);
 
 return $router;
