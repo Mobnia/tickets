@@ -21,8 +21,4 @@ class OauthClient extends Base
         return $this->hasMany(AccessToken::class, 'client_id');
     }
 
-    public function authCodes()
-    {
-        return $this->hasMany(AuthCode::class, 'client_id');
-    }
 }

@@ -16,7 +16,10 @@ class Scope implements ScopeEntityInterface
 {
     use EntityTrait, ScopeTrait;
 
-    public static $scopes = [];
+    public static $scopes = [
+        'read' => 'read',
+        'write' => 'write'
+    ];
 
     public function __construct($name)
     {
