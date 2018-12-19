@@ -60,11 +60,12 @@ class RefreshTokenRepository implements RefreshTokenRepositoryInterface
      */
     public function revokeRefreshToken($tokenId)
     {
-        if ($this->appRefreshToken->find($tokenId) == null)
+        $refreshToken = $this->appRefreshToken->find($tokenId);
+        if ($refreshToken == null)
             return;
 
-        $this->appRefreshToken->revoke();
-        $this->appRefreshToken->save();
+        $refreshToken->revoke();
+        $refreshToken->save();
     }
 
     /**
