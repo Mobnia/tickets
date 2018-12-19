@@ -33,15 +33,15 @@ class ClientRepository implements ClientRepositoryInterface
      *
      * @return ClientEntityInterface
      */
-    public function getClientEntity($clientIdentifier, $grantType = null, $clientSecret = null, $mustValidateSecret = true)
+    public function getClientEntity($clientIdentifier, $grantType = null, $clientSecret = null, $mustValidateSecret = false)
     {
         $client = $this->clients->where('id', $clientIdentifier)->first();
 
         if (!isset($client))
             return null;
 
-        if ($mustValidateSecret && !isset($client->secret) && !password_verify($client->secret, $clientSecret))
-            return null;
+//        if ($mustValidateSecret && !isset($client->secret) && !password_verify($client->secret, $clientSecret))
+//            return null;
 
         return new ClientEntity($clientIdentifier, $client->name, $client->redirectUri);
     }

@@ -22,12 +22,12 @@ $router->setStrategy($routerStrategy);
 
 $router->get('/', function () {
     return [
-        'title'   => 'My New Simple API',
+        'title'   => 'Nice Clean API',
         'version' => 1,
     ];
 });
 
-$router->group('/', function (RouteGroup $router) {
+$router->group('/', function (RouteGroup $router) use ($authenticationMiddleware) {
     $router->get('/events', '\App\Controllers\Events\EventController::getUpcomingEvents');
     $router->get('/events/{id:number}', '\App\Controllers\Events\EventController::getEvent');
     $router->get('/events/{id:number}/tickets', '\App\Controllers\Tickets\TicketController::getTicketsForEvent');
@@ -40,6 +40,7 @@ $router->group('/', function (RouteGroup $router) {
     $router->get('/locations', '\App\Controllers\Locations\LocationController::getLocations');
     $router->get('/locations/{id:number}', '\App\Controllers\Locations\LocationController::getLocation');
 
-})->middleware($authenticationMiddleware);
+    $router->post('/auth/token', '\App\Controllers\Authentication\AuthController::getToken');
+});
 
 return $router;

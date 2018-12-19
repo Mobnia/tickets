@@ -38,9 +38,11 @@ class UserRepository implements UserRepositoryInterface
                                                    $grantType,
                                                    ClientEntityInterface $clientEntity)
     {
-        $user = $this->users->where('username', $username);
+        $user = $this->users->where('username', $username)->first();
 
-        if ($user->password == $password)
+        $dbPassword = $user->password;
+
+        if ($dbPassword != $password)
             return null;
 
         return new User($user->id);
