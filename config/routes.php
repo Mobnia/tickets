@@ -36,6 +36,8 @@ $router->group('/', function (RouteGroup $router) use ($authenticationMiddleware
 
     $router->get('/locations', '\App\Controllers\Locations\LocationController::getLocations');
     $router->get('/locations/{id:number}', '\App\Controllers\Locations\LocationController::getLocation');
+
+    $router->post('/auth/token', '\App\Controllers\Authentication\AuthController::getToken');
 })->middleware($authenticationMiddleware);
 
 return $router;
