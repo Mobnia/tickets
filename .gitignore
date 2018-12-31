@@ -2,3 +2,5 @@
 .idea/
 .env
 coverage/
+!config/oauth/.gitkeep
+config/oauth/*

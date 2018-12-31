@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 
+use App\Authentication\Middleware\AuthenticationMiddleware;
 use App\Authentication\Repositories\RefreshTokenRepository;
 use App\Authentication\Repositories\AccessTokenRepository;
 use App\Authentication\Repositories\ClientRepository;
@@ -16,6 +17,7 @@ use DateInterval;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Grant\PasswordGrant;
 use League\OAuth2\Server\Grant\RefreshTokenGrant;
+use League\OAuth2\Server\ResourceServer;
 
 /**
  * Class AuthenticationProvider
@@ -34,7 +36,7 @@ class AuthenticationProvider extends AbstractServiceProvider
             ) = $this->initRepositories();
 
         $privateKey = __DIR__ . '/../../config/oauth/private.key';
-
+        $publicKey = __DIR__ . '/../../config/oauth/public.key';
         $encryptionKey = '3TvjQrfNPWySOh3ss8kbU7M7yPgCxBS3yRbvYdQn9ko=';
 
         $this->container->singleton(
@@ -60,6 +62,14 @@ class AuthenticationProvider extends AbstractServiceProvider
                 $server->enableGrantType($refreshGrant, new DateInterval('PT1H'));
 
                 return $server;
+            }
+        );
+
+        $this->container->singleton(AuthenticationMiddleware::class,
+            function () use ($accessTokenRepository, $publicKey)
+            {
+                $server = new ResourceServer($accessTokenRepository, $publicKey);
+                return new AuthenticationMiddleware($server);
             }
         );
     }

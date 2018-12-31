@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
-use App\Middleware\AuthenticationMiddleware;
+
+use App\Authentication\Middleware\AuthenticationMiddleware;
 use League\Route\RouteGroup;
 use League\Route\Router;
 use League\Route\Strategy\JsonStrategy;
@@ -27,6 +28,8 @@ $router->get('/', function () {
     ];
 });
 
+$router->post('/auth/token', '\App\Controllers\Authentication\AuthController::getToken');
+
 $router->group('/', function (RouteGroup $router) use ($authenticationMiddleware) {
     $router->get('/events', '\App\Controllers\Events\EventController::getUpcomingEvents');
     $router->get('/events/{id:number}', '\App\Controllers\Events\EventController::getEvent');
@@ -39,8 +42,6 @@ $router->group('/', function (RouteGroup $router) use ($authenticationMiddleware
 
     $router->get('/locations', '\App\Controllers\Locations\LocationController::getLocations');
     $router->get('/locations/{id:number}', '\App\Controllers\Locations\LocationController::getLocation');
-
-    $router->post('/auth/token', '\App\Controllers\Authentication\AuthController::getToken');
-});
+})->middleware($authenticationMiddleware);
 
 return $router;
