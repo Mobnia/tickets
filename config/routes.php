@@ -21,12 +21,6 @@ $authenticationMiddleware = $container->make(AuthenticationMiddleware::class);
 $routerStrategy->setContainer($container);
 $router->setStrategy($routerStrategy);
 
-$router->get('/', function () {
-    return [
-        'title'   => 'Nice Clean API',
-        'version' => 1,
-    ];
-});
 
 $router->post('/auth/token', '\App\Controllers\Authentication\AuthController::getToken');
 
