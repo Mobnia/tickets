@@ -14,7 +14,7 @@ use Aura\Filter\ValueFilter;
 class ValidationProvider extends AbstractServiceProvider
 {
 
-    public function register()
+    public function register(): void
     {
         $filterFactory = new FilterFactory();
 

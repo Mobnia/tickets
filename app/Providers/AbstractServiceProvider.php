@@ -21,5 +21,5 @@ abstract class AbstractServiceProvider
         $this->container = $container;
     }
 
-    abstract public function register();
+    abstract public function register(): void;
 }

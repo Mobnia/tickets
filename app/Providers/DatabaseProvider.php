@@ -18,9 +18,9 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 class DatabaseProvider extends AbstractServiceProvider
 {
 
-    public function register()
+    public function register(): void
     {
-        list($dbUser, $dbHost, $dbName, $dbPassword) = $this->getDatabaseDetails();
+        [$dbUser, $dbHost, $dbName, $dbPassword] = $this->getDatabaseDetails();
 
         $manager = new Manager($this->container);
         $manager->addConnection([

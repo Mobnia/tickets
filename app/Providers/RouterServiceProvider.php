@@ -13,7 +13,7 @@ use League\Route\Router;
 class RouterServiceProvider extends AbstractServiceProvider
 {
 
-    public function register()
+    public function register(): void
     {
         $routeConfig = __DIR__ . '/../../config/routes.php';
         if (!file_exists($routeConfig)) {

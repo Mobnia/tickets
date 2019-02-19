@@ -27,13 +27,12 @@ use League\OAuth2\Server\ResourceServer;
 class AuthenticationProvider extends AbstractServiceProvider
 {
 
-    public function register()
+    public function register(): void
     {
-        list(
+        [
             $clientRepository, $scopeRepository,
             $userRepository, $accessTokenRepository,
-            $refreshTokenRepository
-            ) = $this->initRepositories();
+            $refreshTokenRepository] = $this->initRepositories();
 
         $privateKey = __DIR__ . '/../../config/oauth/private.key';
         $publicKey = __DIR__ . '/../../config/oauth/public.key';
