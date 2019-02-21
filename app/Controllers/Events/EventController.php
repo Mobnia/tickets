@@ -23,7 +23,7 @@ class EventController extends BaseController
         parent::__construct($filter);
     }
 
-    public function getUpcomingEvents(Request $request)
+    public function getUpcomingEvents(Request $request): array
     {
         $events = $this->getAllRecords($this->event);
 
@@ -36,14 +36,16 @@ class EventController extends BaseController
         return $this->returnResponse($events, $page);
     }
 
-    public function getEvent(Request $request, $args)
+    public function getEvent(Request $request, $args): array
     {
         $eventId = $args['id'];
-        $event = $this->event::find($eventId);
+        $eventObject = $this->event::find($eventId);
 
-        if(isset($event)) $this->addEventDetails($event);
+        if(isset($eventObject)) {
+            $this->addEventDetails($eventObject);
+        }
 
-        return $this->returnResponse($event);
+        return $this->returnResponse($eventObject);
     }
 
     /**

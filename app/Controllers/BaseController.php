@@ -41,17 +41,15 @@ class BaseController
     /**
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    protected function getAllRecords(Base $model)
+    protected function getAllRecords(Base $model): Collection
     {
-        $records = $model::all();
-        return $records;
+        return $model::all();
     }
 
     protected function getPage(Request $request): int
     {
         $queries = $request->getQueryParams();
-        $page = isset($queries['page']) ? (int) $queries['page'] : 1;
-        return $page;
+        return isset($queries['page']) ? (int) $queries['page'] : 1;
     }
 
     private function convertObjectToArray($object)
@@ -59,7 +57,7 @@ class BaseController
         return json_decode(json_encode($object), true);
     }
 
-    protected function getPaginator($data)
+    protected function getPaginator($data): Pagerfanta
     {
         return new Pagerfanta(new ArrayAdapter($data));
     }
@@ -73,13 +71,13 @@ class BaseController
         $boolean = true;
 
         if ($object instanceof  Collection) {
-            $boolean = empty($object->all()) ? false : true;
+            $boolean = !empty($object->all());
         }
         else if (!isset($object)) {
             $boolean = false;
         }
 
-        if ($boolean == false) {
+        if ($boolean === false) {
             throw new NotFoundException("The requested resource doesn't exist on this server");
         }
     }
@@ -95,7 +93,7 @@ class BaseController
         ];
     }
 
-    private function returnNonPaginatedResponse($data)
+    private function returnNonPaginatedResponse($data): array
     {
         return [
             'data' => $data

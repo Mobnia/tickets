@@ -39,7 +39,7 @@ class AuthController
         }
     }
 
-    private function returnAuthServerException(OAuthServerException $authServerException)
+    private function returnAuthServerException(OAuthServerException $authServerException): array
     {
         return [
             'error_code' => 401,
@@ -48,7 +48,7 @@ class AuthController
         ];
     }
 
-    private function returnOtherException(\Exception $exception)
+    private function returnOtherException(\Exception $exception): array
     {
         return [
             'error_code' => 401,

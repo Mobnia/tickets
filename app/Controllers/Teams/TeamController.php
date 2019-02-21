@@ -24,7 +24,7 @@ class TeamController extends BaseController
         parent::__construct($filter);
     }
 
-    public function getTeams(Request $request)
+    public function getTeams(Request $request): array
     {
         $teams = $this->getAllRecords($this->team);
 
@@ -37,7 +37,7 @@ class TeamController extends BaseController
         return $this->returnResponse($teams, $page);
     }
 
-    public function getTeam(Request $request, $args)
+    public function getTeam(Request $request, $args): array
     {
         $teamId = $args['id'];
         $team = $this->team::find($teamId);
@@ -47,7 +47,7 @@ class TeamController extends BaseController
         return $this->returnResponse($team);
     }
 
-    protected function addTeamDetails($team)
+    protected function addTeamDetails($team): void
     {
         $team->location;
     }

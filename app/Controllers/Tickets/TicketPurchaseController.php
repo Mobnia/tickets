@@ -25,7 +25,7 @@ class TicketPurchaseController extends BaseController
         parent::__construct($filter);
     }
 
-    public function buyTicket(Request $request, $args)
+    public function buyTicket(Request $request, $args): array
     {
         $buyer = $this->getBuyer($request);
         $ticketId = $args['id'];
@@ -59,17 +59,19 @@ class TicketPurchaseController extends BaseController
         }
     }
 
-    private function ensureRequestDataExists($body)
+    private function ensureRequestDataExists($body): void
     {
-        if (!isset($body->buyerId))
+        if (!isset($body->buyerId)) {
             throw new BadRequestException('The supplied request is invalid');
+        }
     }
 
-    private function verifyBuyer($buyer)
+    private function verifyBuyer($buyer): void
     {
         $ticket = User::find($buyer);
-        if (!isset($ticket))
+        if (!isset($ticket)) {
             throw new BadRequestException('This user doesn\'t exist');
+        }
     }
 
     private function processPurchase($ticketId, $buyer)

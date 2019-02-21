@@ -23,7 +23,7 @@ class TicketController extends BaseController
         parent::__construct($filter);
     }
 
-    public function getTicketsForEvent(Request $request, $args)
+    public function getTicketsForEvent(Request $request, $args): array
     {
         $eventId = $args['id'];
         $page = $this->getPage($request);

@@ -7,6 +7,7 @@ namespace App\Models;
  * Class Event
  *
  * @package \App\Models
+ * @method static find($locationId)
  */
 class Location extends Base
 {

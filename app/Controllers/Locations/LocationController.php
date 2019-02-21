@@ -37,7 +37,7 @@ class LocationController extends BaseController
         return $this->returnResponse($locations, $page);
     }
 
-    public function getLocation(Request $request, $args)
+    public function getLocation(Request $request, $args): array
     {
         $locationId = $args['id'];
         $location = $this->locations::find($locationId);
@@ -47,7 +47,7 @@ class LocationController extends BaseController
         return $this->returnResponse($location);
     }
 
-    public function addLocationDetails($location)
+    public function addLocationDetails($location): void
     {
         $location->events;
     }
