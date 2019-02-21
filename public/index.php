@@ -1,3 +1,3 @@
 <?php declare(strict_types=1);
 
-require_once dirname(dirname(__FILE__))."/bootstrap.php";
+require_once dirname(__FILE__, 2) ."/bootstrap.php";

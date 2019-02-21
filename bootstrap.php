@@ -7,7 +7,7 @@ use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequestFactory;
 use Zend\HttpHandlerRunner\Emitter\SapiEmitter;
 
-require_once dirname(__FILE__)."/vendor/autoload.php";
+require_once __DIR__ ."/vendor/autoload.php";
 error_reporting(E_ALL);
 
 $environment = 'development';
@@ -21,13 +21,13 @@ if ($environment !== 'production') {
 }
 $whoops->register();
 
-$dotenv = new Dotenv(dirname(__FILE__));
+$dotenv = new Dotenv(__DIR__);
 $dotenv->load();
 
 $container = new ContainerAdaptor();
 Container::setInstance($container);
 
-$providers = require_once __DIR__."/config/providers.php";
+$providers = require __DIR__."/config/providers.php";
 foreach ($providers as $provider) {
     (new $provider)->setContainer($container)->register();
 }
