@@ -1,7 +1,6 @@
 language: php
 php:
-- '7.1'
-- hhvm
+- '7.3'
 install:
 - composer install --quiet
 script: phpunit -c phpunit.xml --coverage-text
