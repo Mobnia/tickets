@@ -34,6 +34,7 @@ foreach ($providers as $provider) {
 
 $router = $container->make("app.router");
 $request = ServerRequestFactory::fromGlobals();
+$request = $request->withParsedBody(json_decode(file_get_contents('php://input')));
 $response = new Response();
 $emitter = new SapiEmitter();
 $container->instance("app.emitter", $emitter);

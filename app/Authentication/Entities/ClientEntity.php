@@ -16,7 +16,7 @@ class ClientEntity implements ClientEntityInterface
 {
     use ClientTrait, EntityTrait;
 
-    public function __construct(string $identifier, string $name, string $redirectUri)
+    public function __construct(int $identifier, string $name, string $redirectUri)
     {
         $this->setIdentifier($identifier);
         $this->name = $name;
