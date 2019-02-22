@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 
-
-use Tuupola\Middleware\CorsMiddleware;
+use App\Cors\Middleware\CorsMiddleware;
+use Neomerx\Cors\Strategies\Settings;
 
 /**
  * Class CorsProvider
@@ -13,11 +13,23 @@ use Tuupola\Middleware\CorsMiddleware;
  */
 class CorsProvider extends AbstractServiceProvider
 {
-
     public function register(): void
     {
-        $this->container->singleton(CorsMiddleware::class, function() {
-            return new CorsMiddleware();
+
+        $settings = (new Settings())
+            ->setServerOrigin('http', 'localhost', 8090)
+            ->setPreFlightCacheMaxAge(0)
+            ->setCredentialsSupported()
+            ->enableAllOriginsAllowed()                                 // or enableAllOriginsAllowed()
+            ->setAllowedMethods(['GET', 'POST', 'PUT' , 'OPTIONS'])     // or enableAllMethodsAllowed()
+            ->setAllowedHeaders(['Authorization', 'Content-Type'])
+            ->setExposedHeaders([])
+            ->enableCheckHost()
+            ->enableAddAllowedHeadersToPreFlightResponse()
+            ->enableAddAllowedMethodsToPreFlightResponse();
+
+        $this->container->singleton(CorsMiddleware::class, function () use ($settings) {
+            return new CorsMiddleware($settings);
         });
     }
 }

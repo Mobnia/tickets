@@ -38,5 +38,10 @@ $response = new Response();
 $emitter = new SapiEmitter();
 $container->instance("app.emitter", $emitter);
 
-$response = $router->dispatch($request);
+if ($request->getMethod() === 'OPTIONS') {
+    $handler = $container->make(\App\Cors\Middleware\CorsMiddleware::class);
+    $response = $handler->handlePreFlightRequest($request, $response);
+} else {
+    $response = $router->dispatch($request);
+}
 $emitter->emit($response);

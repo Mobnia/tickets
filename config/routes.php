@@ -2,10 +2,10 @@
 
 
 use App\Authentication\Middleware\AuthenticationMiddleware;
+use App\Cors\Middleware\CorsMiddleware;
 use League\Route\RouteGroup;
 use League\Route\Router;
 use League\Route\Strategy\JsonStrategy;
-use Tuupola\Middleware\CorsMiddleware;
 use Zend\Diactoros\ResponseFactory;
 
 const CONTAINER = 'container';
@@ -25,7 +25,6 @@ $corsMiddleware = $container->make(CorsMiddleware::class);
 
 $routerStrategy->setContainer($container);
 $router->setStrategy($routerStrategy);
-
 
 $router->post('/auth/token', '\App\Controllers\Authentication\AuthController::getToken');
 
